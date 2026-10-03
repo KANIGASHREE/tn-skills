@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+History
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-head">
+
+    <p class="eyebrow">
+        SAVED PLANS
+    </p>
+
+    <h1>
+        Recommendation history
+    </h1>
+
+</section>
+
+
+<section class="card">
+
+    <div id="history">
+        Loading...
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+(async function() {
+
+    const historyData =
+        await api("/history");
+
+
+    const container =
+        document.getElementById(
+            "history"
+        );
+
+
+    if (historyData.length) {
+
+        container.innerHTML =
+            historyData
+                .map(
+                    item => `
+
+                    <details
+                        class="history-item"
+                    >
+
+                        <summary>
+
+                            <b>
+                                ${item.planner_type}
+                            </b>
+
+                            · ₹${Number(
+                                item.budget
+                            ).toLocaleString()}
+
+                            · ${new Date(
+                                item.created_at
+                            ).toLocaleString()}
+
+                        </summary>
+
+
+                        <p>
+                            ${item.result.summary}
+                        </p>
+
+
+                        <p>
+
+                            <b>
+                                Estimated:
+                            </b>
+
+                            ₹${Number(
+                                item.result
+                                    .estimated_total
+                            ).toLocaleString()}
+
+                        </p>
+
+                    </details>
+
+                    `
+                )
+                .join("");
+
+    } else {
+
+        container.innerHTML =
+            "No saved plans.";
+
+    }
+
+})();
+
+</script>
+
+{% endblock %}

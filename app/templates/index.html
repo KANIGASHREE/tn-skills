@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}
+PocketSmart AI
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <p class="eyebrow">
+            SMART BUDGET + GENERATIVE AI
+        </p>
+
+        <h1>
+            Plan smarter.
+            Spend with confidence.
+        </h1>
+
+        <p>
+            Budget-aware planning for home interiors,
+            parties and jewelry.
+            Gemini can personalize recommendations,
+            with a local fallback for reliable testing.
+        </p>
+
+        <div class="actions">
+
+            <a
+                class="btn"
+                href="/register"
+            >
+                Get Started
+            </a>
+
+            <a
+                class="btn secondary"
+                href="/login"
+            >
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <div class="orb">
+            ✦
+        </div>
+
+        <h3>
+            One budget.
+            Many possibilities.
+        </h3>
+
+        <p>
+            See categories,
+            estimated totals and
+            shopping destinations together.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="grid three">
+
+    <a
+        class="card feature"
+        href="/planner/home"
+    >
+
+        <b>
+            🏠 Home Interior
+        </b>
+
+        <p>
+            Furniture, lighting and décor.
+        </p>
+
+    </a>
+
+
+    <a
+        class="card feature"
+        href="/planner/party"
+    >
+
+        <b>
+            🎉 Party Planner
+        </b>
+
+        <p>
+            Catering, venue and decoration.
+        </p>
+
+    </a>
+
+
+    <a
+        class="card feature"
+        href="/planner/jewelry"
+    >
+
+        <b>
+            💎 Jewelry Planner
+        </b>
+
+        <p>
+            Occasion and style matching
+            with optional outfit image.
+        </p>
+
+    </a>
+
+</section>
+
+{% endblock %}

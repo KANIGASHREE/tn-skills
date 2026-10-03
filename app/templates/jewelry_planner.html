@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}
+Jewelry Planner
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-head">
+
+    <p class="eyebrow">
+        JEWELRY PLANNER
+    </p>
+
+    <h1>
+        Complete the occasion look
+    </h1>
+
+</section>
+
+
+<form
+    id="plannerForm"
+    class="card form-grid"
+>
+
+    <label>
+
+        Budget ₹
+
+        <input
+            id="budget"
+            type="number"
+            min="1"
+            required
+        >
+
+    </label>
+
+
+    <label>
+
+        Occasion
+
+        <select id="occasion">
+
+            <option>
+                Wedding
+            </option>
+
+            <option>
+                Festive
+            </option>
+
+            <option>
+                Party
+            </option>
+
+            <option>
+                Formal
+            </option>
+
+            <option>
+                Casual
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <label>
+
+        Style
+
+        <select id="style">
+
+            <option>
+                elegant
+            </option>
+
+            <option>
+                traditional
+            </option>
+
+            <option>
+                minimal
+            </option>
+
+            <option>
+                modern
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <label>
+
+        Outfit image
+
+        <input
+            id="outfit_image"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+        >
+
+    </label>
+
+
+    <label class="wide">
+
+        Preferences
+
+        <textarea
+            id="preferences"
+        ></textarea>
+
+    </label>
+
+
+    <button
+        class="btn wide"
+    >
+        Generate
+    </button>
+
+
+    <p
+        id="msg"
+        class="msg wide"
+    ></p>
+
+</form>
+
+
+<section
+    id="results"
+    class="results"
+></section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+plannerFormJewelry();
+
+</script>
+
+{% endblock %}

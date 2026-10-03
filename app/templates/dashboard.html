@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-head">
+
+    <p class="eyebrow">
+        YOUR SPACE
+    </p>
+
+    <h1 id="welcome">
+        Dashboard
+    </h1>
+
+    <p>
+        Recent planning activity.
+    </p>
+
+</section>
+
+
+<div class="grid three">
+
+    <a
+        class="card feature"
+        href="/planner/home"
+    >
+
+        <b>
+            🏠 Home Plan
+        </b>
+
+        <p>
+            Design within budget.
+        </p>
+
+    </a>
+
+
+    <a
+        class="card feature"
+        href="/planner/party"
+    >
+
+        <b>
+            🎉 Event Plan
+        </b>
+
+        <p>
+            Budget your celebration.
+        </p>
+
+    </a>
+
+
+    <a
+        class="card feature"
+        href="/planner/jewelry"
+    >
+
+        <b>
+            💎 Jewelry Plan
+        </b>
+
+        <p>
+            Complete the occasion look.
+        </p>
+
+    </a>
+
+</div>
+
+
+<section class="card">
+
+    <h2>
+        Recent plans
+    </h2>
+
+    <div id="recent">
+        Loading...
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+(async function() {
+
+    const user =
+        await api("/session-info");
+
+    if (user.detail) {
+
+        location.href =
+            "/login";
+
+        return;
+    }
+
+
+    document
+        .getElementById("welcome")
+        .textContent =
+        "Hi, " +
+        user.full_name +
+        " 👋";
+
+
+    const historyData =
+        await api("/history");
+
+
+    const recent =
+        document.getElementById(
+            "recent"
+        );
+
+
+    if (historyData.length) {
+
+        recent.innerHTML =
+            historyData
+                .slice(0, 5)
+                .map(
+                    item => `
+
+                    <div class="history-row">
+
+                        <b>
+                            ${item.planner_type}
+                        </b>
+
+                        <span>
+                            ₹${Number(
+                                item.budget
+                            ).toLocaleString()}
+                        </span>
+
+                        <span>
+                            ${new Date(
+                                item.created_at
+                            ).toLocaleString()}
+                        </span>
+
+                    </div>
+
+                    `
+                )
+                .join("");
+
+    } else {
+
+        recent.innerHTML =
+            "No plans yet.";
+
+    }
+
+})();
+
+</script>
+
+{% endblock %}

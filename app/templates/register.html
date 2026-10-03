@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+
+{% block content %}
+
+<div class="auth card">
+
+    <h1>
+        Create account
+    </h1>
+
+
+    <form id="registerForm">
+
+        <label>
+
+            Full name
+
+            <input
+                id="full_name"
+                required
+            >
+
+        </label>
+
+
+        <label>
+
+            Email
+
+            <input
+                id="email"
+                type="email"
+                required
+            >
+
+        </label>
+
+
+        <label>
+
+            Password
+
+            <input
+                id="password"
+                type="password"
+                minlength="8"
+                required
+            >
+
+        </label>
+
+
+        <button class="btn">
+            Register
+        </button>
+
+
+        <p
+            id="msg"
+            class="msg"
+        ></p>
+
+    </form>
+
+
+    <p>
+
+        Already registered?
+
+        <a href="/login">
+            Login
+        </a>
+
+    </p>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+document
+    .querySelector("#registerForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            const result = await api(
+                "/register",
+                {
+                    method: "POST",
+
+                    body: JSON.stringify({
+                        full_name:
+                            full_name.value,
+
+                        email:
+                            email.value,
+
+                        password:
+                            password.value
+                    })
+                }
+            );
+
+            if (result.user_id) {
+
+                location.href =
+                    "/login";
+
+            } else {
+
+                msg.textContent =
+                    result.detail ||
+                    "Registration failed.";
+
+            }
+
+        }
+    );
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home Planner
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-head">
+
+    <p class="eyebrow">
+        HOME INTERIOR
+    </p>
+
+    <h1>
+        Build your room plan
+    </h1>
+
+</section>
+
+
+<form
+    id="plannerForm"
+    class="card form-grid"
+>
+
+    <label>
+
+        Budget ₹
+
+        <input
+            id="budget"
+            type="number"
+            min="1"
+            required
+        >
+
+    </label>
+
+
+    <label>
+
+        Room
+
+        <select id="room_type">
+
+            <option>
+                Living Room
+            </option>
+
+            <option>
+                Bedroom
+            </option>
+
+            <option>
+                Kitchen
+            </option>
+
+            <option>
+                Dining Room
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <label>
+
+        Style
+
+        <select id="style">
+
+            <option>
+                modern
+            </option>
+
+            <option>
+                minimal
+            </option>
+
+            <option>
+                traditional
+            </option>
+
+            <option>
+                boho
+            </option>
+
+        </select>
+
+    </label>
+
+
+    <label class="wide">
+
+        Requirements
+
+        <textarea
+            id="requirements"
+        ></textarea>
+
+    </label>
+
+
+    <button
+        class="btn wide"
+    >
+        Generate
+    </button>
+
+
+    <p
+        id="msg"
+        class="msg wide"
+    ></p>
+
+</form>
+
+
+<section
+    id="results"
+    class="results"
+></section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+plannerJsonForm(
+    "/generate-home",
+
+    function() {
+
+        return {
+
+            budget:
+                Number(
+                    budget.value
+                ),
+
+            room_type:
+                room_type.value,
+
+            style:
+                style.value,
+
+            requirements:
+                requirements.value,
+
+            quantities: {}
+
+        };
+
+    }
+);
+
+</script>
+
+{% endblock %}
